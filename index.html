@@ -1,23 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Psychihc Game</title>
+    <title>Psychic Game</title>
 </head>
+
 <body>
-    <h1>Psychihc Game</h1>
+    <h1>Psychic Game</h1>
     <hr>
     <p><b>Guess what lettter I`m thinking of</b></p>
-    <p>Wins:</p><div id="wins"></div>
-    <p>Losses:</p><div id="losses"></div>
-    <p>Guesses Left:</p><div id="guesses_left"></div>
-    <p>Your Guesses so far:</p><div id="guesses_so_far"></div>
+    <p>Wins:</p>
+    <div id="wins-text"></div>
+    <p>Losses:</p>
+    <div id="losses-text"></div>
+    <p>Guesses left:</p>
+    <div id="guesses_left"></div>
+    <p>Your Guesses so far:</p>
+    <div id="guesses_far"></div>
 
-<script>
-     var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    <script>
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        var userGuesses = []
+        var wins = 0;
+        var losses = 0;
+        var guessesPossible = 9;
 
-</script>
+        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+        document.onkeyup = function (event) {
+            var userGuess = event.key;
+            userGuesses.push(userGuess)
+        if (userGuess === computerGuess) {
+             wins++
+             document.getElementById("wins-text").textContent = wins;
+             resetGame()
+        }else {
+                if (userGuesses.length<guessesPossible){
+                    document.getElementById("guesses_far").textContent = userGuesses.join(",");
+
+                }else {
+                    losses++;
+                    document.getElementById("losses-text").textContent = losses
+                    resetGame()                
+                }
+        }
+    
+        }
+        function resetGame(){
+            userGuesses=[];
+            computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+        }
+
+
+
+
+
+    </script>
 </body>
+
 </html>
